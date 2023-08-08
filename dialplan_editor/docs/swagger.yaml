@@ -1,0 +1,188 @@
+definitions:
+  handler.CreateDir.CreateDirRequest:
+    properties:
+      dirname:
+        type: string
+      path:
+        type: string
+    required:
+    - dirname
+    type: object
+  handler.GetAudio.GetAudioRequest:
+    properties:
+      file:
+        type: string
+      path:
+        type: string
+    required:
+    - file
+    type: object
+  handler.GetFiles.GetFilesRequest:
+    properties:
+      path:
+        type: string
+      server:
+        type: integer
+    type: object
+  handler.GetScript.GetScriptRequest:
+    properties:
+      file:
+        type: string
+      path:
+        type: string
+    required:
+    - file
+    type: object
+  handler.UpdateScript.UpdateScriptRequest:
+    properties:
+      content:
+        type: string
+      file:
+        type: string
+      path:
+        type: string
+    required:
+    - content
+    - file
+    type: object
+  handler.UploadFiles.UploadFilesRequest:
+    properties:
+      convertlist:
+        items:
+          type: string
+        type: array
+      exstantion:
+        type: string
+      path:
+        type: string
+    type: object
+  models.File:
+    properties:
+      changed:
+        type: string
+      name:
+        type: string
+      size:
+        type: string
+      type:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: Swagger API for Golang Project
+  title: Swagger API
+  version: "1.0"
+paths:
+  /create-dir:
+    post:
+      description: Создать новую директорию.
+      parameters:
+      - description: Модификатор запроса
+        in: body
+        name: query
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateDir.CreateDirRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Создать новую директорию
+      tags:
+      - CreateDir
+  /get-audio:
+    get:
+      description: Получить аудиофайл.
+      parameters:
+      - description: Модификатор запроса
+        in: body
+        name: query
+        required: true
+        schema:
+          $ref: '#/definitions/handler.GetAudio.GetAudioRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              items:
+                type: integer
+              type: array
+            type: array
+      summary: Получить аудиофайл
+      tags:
+      - GetAudio
+  /get-files:
+    get:
+      description: Получить файлы.
+      parameters:
+      - description: Модификатор запроса
+        in: body
+        name: query
+        required: true
+        schema:
+          $ref: '#/definitions/handler.GetFiles.GetFilesRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/models.File'
+              type: array
+            type: array
+      summary: Получить файлы
+      tags:
+      - GetFiles
+  /get-script:
+    get:
+      description: Получить скрипт файл.
+      parameters:
+      - description: Модификатор запроса
+        in: body
+        name: query
+        required: true
+        schema:
+          $ref: '#/definitions/handler.GetScript.GetScriptRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Получить скрипт файл
+      tags:
+      - GetScript
+  /update-script:
+    post:
+      description: Обновить скрипт файл.
+      parameters:
+      - description: Модификатор запроса
+        in: body
+        name: query
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateScript.UpdateScriptRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Обновить скрипт файл
+      tags:
+      - UpdateScript
+  /upload-files:
+    post:
+      description: Добавить файлы на сервер.
+      parameters:
+      - description: Модификатор запроса
+        in: body
+        name: query
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UploadFiles.UploadFilesRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Добавить файлы на сервер
+      tags:
+      - UploadFiles
+swagger: "2.0"

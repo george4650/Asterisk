@@ -1,0 +1,288 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Swagger API for Golang Project",
+        "title": "Swagger API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/create-dir": {
+            "post": {
+                "description": "Создать новую директорию.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "CreateDir"
+                ],
+                "summary": "Создать новую директорию",
+                "parameters": [
+                    {
+                        "description": "Модификатор запроса",
+                        "name": "query",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.CreateDir.CreateDirRequest"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/get-audio": {
+            "get": {
+                "description": "Получить аудиофайл.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "GetAudio"
+                ],
+                "summary": "Получить аудиофайл",
+                "parameters": [
+                    {
+                        "description": "Модификатор запроса",
+                        "name": "query",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.GetAudio.GetAudioRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "items": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get-files": {
+            "get": {
+                "description": "Получить файлы.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "GetFiles"
+                ],
+                "summary": "Получить файлы",
+                "parameters": [
+                    {
+                        "description": "Модификатор запроса",
+                        "name": "query",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.GetFiles.GetFilesRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/models.File"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get-script": {
+            "get": {
+                "description": "Получить скрипт файл.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "GetScript"
+                ],
+                "summary": "Получить скрипт файл",
+                "parameters": [
+                    {
+                        "description": "Модификатор запроса",
+                        "name": "query",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.GetScript.GetScriptRequest"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/update-script": {
+            "post": {
+                "description": "Обновить скрипт файл.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "UpdateScript"
+                ],
+                "summary": "Обновить скрипт файл",
+                "parameters": [
+                    {
+                        "description": "Модификатор запроса",
+                        "name": "query",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.UpdateScript.UpdateScriptRequest"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/upload-files": {
+            "post": {
+                "description": "Добавить файлы на сервер.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "UploadFiles"
+                ],
+                "summary": "Добавить файлы на сервер",
+                "parameters": [
+                    {
+                        "description": "Модификатор запроса",
+                        "name": "query",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.UploadFiles.UploadFilesRequest"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "handler.CreateDir.CreateDirRequest": {
+            "type": "object",
+            "required": [
+                "dirname"
+            ],
+            "properties": {
+                "dirname": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.GetAudio.GetAudioRequest": {
+            "type": "object",
+            "required": [
+                "file"
+            ],
+            "properties": {
+                "file": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.GetFiles.GetFilesRequest": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string"
+                },
+                "server": {
+                    "type": "integer"
+                }
+            }
+        },
+        "handler.GetScript.GetScriptRequest": {
+            "type": "object",
+            "required": [
+                "file"
+            ],
+            "properties": {
+                "file": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.UpdateScript.UpdateScriptRequest": {
+            "type": "object",
+            "required": [
+                "content",
+                "file"
+            ],
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "file": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.UploadFiles.UploadFilesRequest": {
+            "type": "object",
+            "properties": {
+                "convertlist": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "exstantion": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.File": {
+            "type": "object",
+            "properties": {
+                "changed": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "size": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
